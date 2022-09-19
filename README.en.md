@@ -1,0 +1,26 @@
+# color-tools
+
+#### Description
+color-tools
+
+#### Software Architecture
+Used to convert different types of color values
+
+#### Installation
+
+1.  npm i color-tools
+2.  xxxx
+3.  xxxx
+
+#### Instructions
+
+1.  xxxx
+2.  xxxx
+3.  xxxx
+
+#### Contribution
+
+1.  Fork the repository
+2.  Create Feat_xxx branch
+3.  Commit your code
+4.  Create Pull Request
