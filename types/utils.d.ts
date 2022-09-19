@@ -1,0 +1,26 @@
+import { IColor } from './interface';
+export declare const regTest: (value: string, key?: string) => boolean;
+export declare const def: (value: any, def: any) => any;
+export declare const fmtVal: (value?: number, max?: number) => number;
+export declare const fmtInt: (value: number, max?: number) => number;
+export declare const hex2num: (hex: string | number | undefined | null) => number;
+export declare const num2hex: (num: number) => string;
+export declare const hexPct: (hex: string | undefined | null) => number;
+export declare const pctHex: (pct: number) => string;
+export declare const toLow: (color?: string) => string;
+export declare const deleteSpace: (color?: string) => string;
+export declare const fmtSpace: (color?: string) => string;
+export declare const colorType: (color: string) => string;
+export declare const hasAlpha: (color: string) => boolean;
+export declare const doubleHex: (hex: string) => string;
+export declare const formatHex: (color: string) => string | undefined;
+export declare const getColorMap: (color: string) => IColor;
+export declare const isRgb: (color: string) => boolean;
+export declare const isHex: (color: string) => boolean;
+export declare const isHsv: (color: string) => boolean;
+export declare const isHsl: (color: string) => boolean;
+export declare const isRgba: (color: string) => boolean;
+export declare const isHexa: (color: string) => boolean;
+export declare const isHsva: (color: string) => boolean;
+export declare const isHsla: (color: string) => boolean;
+//# sourceMappingURL=utils.d.ts.map
