@@ -9,9 +9,26 @@ color-tools 用来转换颜色之间的值
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  安装
+```text
+npm i @etertops/color-tools
+
+yarn add @etertops/color-tools
+
+```
+
+2.  使用
+```javascript
+import { convert, toRgb, rgbaToRgb } from "@etertops/color-tools"
+
+convert('#05f', 'rgb') // rgb(0, 85, 255)
+
+toRgb('#05f') // rgb(0, 85, 255)
+
+rgbaToRgb('rgba(0, 0, 0, .5)') // rgb(128, 128, 128)
+rgbaToRgb('rgba(0, 0, 0, .5)', 'rgb(128, 24, 46)') // 'rgb(64, 12, 23)'
+
+```
 
 #### 使用说明
 
