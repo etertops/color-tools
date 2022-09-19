@@ -1,5 +1,5 @@
 import * as utils from './utils'
-import { ITools } from './index.d'
+import { ITools } from './interface'
 import { DEF_BG, CM } from './constants'
 import { rgba2rgb, alpha2rgb, rgb2hsv, rgb2hsl } from './converts'
 

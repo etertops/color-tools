@@ -1,6 +1,6 @@
 import { DEF_BG } from './constants'
 import { fmtInt, fmtVal, getColorMap } from './utils'
-import { IHsv, IHsl, IColor, ICmy } from './index.d'
+import { IHsv, IHsl, IColor, ICmy } from './interface'
 
 // hsl值转化为hsv值
 export const hsl2hsv = (hue: number, sat: number, light: number): IHsv => {
