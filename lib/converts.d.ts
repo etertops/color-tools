@@ -9,4 +9,3 @@ export declare const cmy2rgb: (cyan: number, magenta: number, yellow: number) =>
 export declare const rgb2cmy: (r: number, g: number, b: number) => IColor;
 export declare const rgba2rgb: (color: string, bgColor?: string) => IColor;
 export declare const alpha2rgb: (color: string) => IColor;
-//# sourceMappingURL=converts.d.ts.map

@@ -23,4 +23,3 @@ export declare const isRgba: (color: string) => boolean;
 export declare const isHexa: (color: string) => boolean;
 export declare const isHsva: (color: string) => boolean;
 export declare const isHsla: (color: string) => boolean;
-//# sourceMappingURL=utils.d.ts.map

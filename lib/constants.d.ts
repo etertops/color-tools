@@ -16,4 +16,3 @@ export declare const CM: {
 export declare const REG_EXP_MAP: {
     [x: string]: RegExp;
 };
-//# sourceMappingURL=constants.d.ts.map

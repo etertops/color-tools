@@ -1,19 +1,3 @@
-export interface ITools {
-    isColor: Function;
-    rgbaToRgb: Function;
-    toRgb: Function;
-    toRgba: Function;
-    toHex: Function;
-    toHexa: Function;
-    toHsv: Function;
-    toHsva: Function;
-    toHsl: Function;
-    toHsla: Function;
-    getColorDepth: Function;
-    darkColor: Function;
-    lightColor: Function;
-    [key: string]: any;
-}
 export interface IColor {
     r: number;
     g: number;
@@ -58,4 +42,3 @@ export interface IColorMap {
     hsv_a?: string;
     hsl_a?: string;
 }
-//# sourceMappingURL=interface.d.ts.map

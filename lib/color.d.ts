@@ -1,4 +1,3 @@
-import { ITools } from './interface';
 /**
  * 判断是否为颜色值
  * RGBA color to RGB
@@ -85,6 +84,3 @@ export declare const darkColor: (color: string, criticalValue?: number) => boole
  * @param criticalValue 临界值 默认127.5
  */
 export declare const lightColor: (color: string, criticalValue: number) => boolean | undefined;
-declare const tools: ITools;
-export default tools;
-//# sourceMappingURL=color.d.ts.map

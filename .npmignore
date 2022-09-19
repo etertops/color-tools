@@ -26,7 +26,6 @@ package-lock.json*
 *.njsproj
 *.sln
 *.sw?
-*.map
 .gitignore
 .npmignore
 .eslintignore
