@@ -37,3 +37,4 @@ tsconfig.eslint.json
 babel.config.js
 rollup.config.js
 example
+test
