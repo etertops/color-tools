@@ -1,7 +1,7 @@
 import tools from './color'
 
 export default {
-  version: '1.0.3',
+  version: '1.0.4',
   ...tools,
   convert(color: string, target: string): any {
     if (tools.isColor(color)) {
