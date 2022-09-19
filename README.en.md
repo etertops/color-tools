@@ -16,7 +16,9 @@ yarn add @etertops/color-tools
 
 ```
 
-2.  Used
+#### Instructions
+
+1. Instructions
 ```javascript
 import { convert, toRgb, rgbaToRgb } from "@etertops/color-tools"
 

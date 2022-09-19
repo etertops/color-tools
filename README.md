@@ -17,7 +17,8 @@ yarn add @etertops/color-tools
 
 ```
 
-2.  使用
+#### 使用说明
+1.  使用说明
 ```javascript
 import { convert, toRgb, rgbaToRgb } from "@etertops/color-tools"
 
@@ -29,12 +30,6 @@ rgbaToRgb('rgba(0, 0, 0, .5)') // rgb(128, 128, 128)
 rgbaToRgb('rgba(0, 0, 0, .5)', 'rgb(128, 24, 46)') // 'rgb(64, 12, 23)'
 
 ```
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
 
 #### 参与贡献
 

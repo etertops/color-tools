@@ -1,6 +1,6 @@
 {
   "name": "@etertops/color-tools",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "color tools",
   "main": "lib/index.js",
   "directories": {
