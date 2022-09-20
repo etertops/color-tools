@@ -1,4 +1,4 @@
-import { IColor } from './index.d'
+import { IColor } from './interface'
 import { CM, REG_EXP_MAP } from './constants'
 import { decomposeHexa, decomposeHsla, decomposeHsva, decomposeRgba } from './decomposes'
 

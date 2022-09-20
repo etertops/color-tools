@@ -1,5 +1,4 @@
 import * as utils from './utils'
-import { ITools } from './index.d'
 import { DEF_BG, CM } from './constants'
 import { rgba2rgb, alpha2rgb, rgb2hsv, rgb2hsl } from './converts'
 
@@ -166,20 +165,3 @@ export const lightColor = (color: string, criticalValue?: number): boolean | und
   if (!utils.colorType(color)) return undefined
   return !darkColor(color, criticalValue)
 }
-const tools: ITools = {
-  toRgb,
-  toHex,
-  toHsv,
-  toHsl,
-  toRgba,
-  toHexa,
-  toHsva,
-  toHsla,
-  isColor,
-  rgbaToRgb,
-  darkColor,
-  lightColor,
-  getColorDepth
-}
-
-export default tools

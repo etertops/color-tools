@@ -1,4 +1,4 @@
-import { IColor } from './index.d'
+import { IColor } from './interface'
 import { hsl2rgb, hsv2rgb } from './converts'
 import { deleteSpace, fmtVal, formatHex, hasAlpha, hex2num, hexPct, fmtInt, pctToNum } from './utils'
 

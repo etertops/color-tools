@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+/dist
 
 /tests/e2e/reports/
 selenium-debug.log
@@ -19,10 +20,20 @@ package-lock.json*
 # Editor directories and files
 .history
 .idea
-.history
 .vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.gitignore
+.npmignore
+.eslintignore
+.eslintrc.js
+.prettierrc.js
+tsconfig.json
+tsconfig.eslint.json
+babel.config.js
+rollup.config.js
+example
+test
