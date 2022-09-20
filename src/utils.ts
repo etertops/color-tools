@@ -16,6 +16,10 @@ export const def = (value: any, def: any): any => {
   return value == null ? def : value
 }
 
+export const getSplitKey = (string: string): string => {
+  return string.includes(',') ? ',' : ' '
+}
+
 // 格式化值，保证值在0与max之间
 export const fmtVal = (value: number = 0, max: number = 255): number => {
   return Math.max(0, Math.min(value, max))
@@ -25,6 +29,9 @@ export const fmtVal = (value: number = 0, max: number = 255): number => {
 export const fmtInt = (value: number, max: number = 255): number => {
   return Math.round(fmtVal(value, max))
 }
+
+// 百分百转数字
+export const pctToNum = (pct: string): number => (pct.endsWith('%') ? parseFloat(pct) / 100 : parseFloat(pct))
 
 // 十六进制转数字
 export const hex2num = (hex: string | number | undefined | null): number => {

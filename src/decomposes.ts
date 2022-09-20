@@ -1,19 +1,20 @@
 import { IColor } from './index.d'
 import { hsl2rgb, hsv2rgb } from './converts'
-import { deleteSpace, fmtVal, formatHex, hasAlpha, hex2num, hexPct } from './utils'
+import { deleteSpace, fmtVal, formatHex, hasAlpha, hex2num, hexPct, fmtInt, pctToNum } from './utils'
 
 // 分解rgba颜色值
 export const decomposeRgba = (color: string): IColor => {
-  const c = deleteSpace(color)
-    .replace(/^rgba?/gi, '')
-    .replace(/[()]/g, '')
+  const [r, g, b, a] = color
+    .trim()
+    .replace(/(^rgba?)|[()]/gi, '')
+    .trim()
+    .replace(/\s+,?\s*/g, ',')
     .split(',')
-    .map(val => Number(val))
   return {
-    r: fmtVal(c[0]),
-    g: fmtVal(c[1]),
-    b: fmtVal(c[2]),
-    a: hasAlpha(color) ? fmtVal(c[3] ?? 1, 1) : 1
+    r: fmtInt(r ? parseFloat(r) : 0),
+    g: fmtInt(g ? parseFloat(g) : 0),
+    b: fmtInt(b ? parseFloat(b) : 0),
+    a: a ? fmtVal(pctToNum(a), 1) : undefined
   }
 }
 

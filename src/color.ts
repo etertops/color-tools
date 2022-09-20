@@ -162,7 +162,7 @@ export const darkColor = (color: string, criticalValue: number = 127.5): boolean
  * @param color 颜色值
  * @param criticalValue 临界值 默认127.5
  */
-export const lightColor = (color: string, criticalValue: number): boolean | undefined => {
+export const lightColor = (color: string, criticalValue?: number): boolean | undefined => {
   if (!utils.colorType(color)) return undefined
   return !darkColor(color, criticalValue)
 }
