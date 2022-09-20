@@ -1,4 +1,4 @@
-import { DEF_BG } from './constants'
+import { DEF_BG, DEF_BG_MAP } from './constants'
 import { fmtInt, fmtVal, getColorMap } from './utils'
 import { IHsv, IHsl, IColor, ICmy } from './interface'
 
@@ -164,14 +164,19 @@ export const rgb2cmy = (r: number, g: number, b: number): IColor => {
 }
 
 // 把rgba的颜色值，转化为rgb颜色值
-export const rgba2rgb = (color: string, bgColor: string = DEF_BG): IColor => {
-  const rgba = getColorMap(color)
+export const rgba2rgbByMap = (rgba: IColor, bgMap: IColor = DEF_BG_MAP): IColor => {
   const alpha = rgba.a ?? 1
-  const bgMap = getColorMap(bgColor)
   const r = Math.round(rgba.r * alpha + bgMap.r * (1 - alpha))
   const g = Math.round(rgba.g * alpha + bgMap.g * (1 - alpha))
   const b = Math.round(rgba.b * alpha + bgMap.b * (1 - alpha))
-  return { r, g, b, a: 1 }
+  return { r, g, b, a: undefined }
+}
+
+// 把rgba的颜色值，转化为rgb颜色值
+export const rgba2rgb = (color: string, bgColor: string = DEF_BG): IColor => {
+  const rgba = getColorMap(color)
+  const bgMap = getColorMap(bgColor)
+  return rgba2rgbByMap(rgba, bgMap)
 }
 
 // 把有透明度的颜色值转为rgb颜色

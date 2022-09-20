@@ -1,10 +1,35 @@
-import * as tools from './color'
+import {
+  toRgb,
+  toHex,
+  toHsv,
+  toHsl,
+  toRgba,
+  toHexa,
+  toHsva,
+  toHsla,
+  rgbaToRgb,
+  darkColor,
+  lightColor,
+  getColorDepth
+} from './color'
+import { isColor } from './utils'
 
 export default {
+  toRgb,
+  toHex,
+  toHsv,
+  toHsl,
+  toRgba,
+  toHexa,
+  toHsva,
+  toHsla,
+  rgbaToRgb,
+  darkColor,
+  lightColor,
+  getColorDepth,
   version: '1.0.11',
-  ...tools,
   convert(color: string, target: string): any {
-    if (tools.isColor(color)) {
+    if (isColor(color)) {
       const key = `to${target[0].toUpperCase()}${target.slice(1).toLowerCase()}`
       // @ts-expect-error
       const fn = tools[key]

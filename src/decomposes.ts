@@ -1,20 +1,19 @@
-import { IColor } from './interface'
 import { hsl2rgb, hsv2rgb } from './converts'
-import { deleteSpace, fmtVal, formatHex, hasAlpha, hex2num, hexPct, fmtInt, pctToNum } from './utils'
+import { IColor, IHsl, IHsv } from './interface'
+import { deleteSpace, formatHex, hex2num, hexPct, prsAlpha, prsFltInt } from './utils'
 
 // 分解rgba颜色值
 export const decomposeRgba = (color: string): IColor => {
   const [r, g, b, a] = color
-    .trim()
     .replace(/(^rgba?)|[()]/gi, '')
     .trim()
-    .replace(/\s+,?\s*/g, ',')
+    .replace(/[,\s]+/g, ',')
     .split(',')
   return {
-    r: fmtInt(r ? parseFloat(r) : 0),
-    g: fmtInt(g ? parseFloat(g) : 0),
-    b: fmtInt(b ? parseFloat(b) : 0),
-    a: a ? fmtVal(pctToNum(a), 1) : undefined
+    r: prsFltInt(r),
+    g: prsFltInt(g),
+    b: prsFltInt(b),
+    a: prsAlpha(a)
   }
 }
 
@@ -30,23 +29,45 @@ export const decomposeHexa = (color: string): IColor => {
 }
 
 // 分解hsl颜色值
-export const decomposeHsla = (color: string): IColor => {
-  const c = deleteSpace(color)
-    .replace(/(^hsla?)|[()%]/gi, '')
+export const decomposeHsla = (color: string): IHsl => {
+  const [h, s, l, a] = color
+    .replace(/(^hsla?)|[()]/gi, '')
+    .trim()
+    .replace(/[,\s]+/g, ',')
     .split(',')
-    .map(val => Number(val))
-  const a = hasAlpha(color) ? fmtVal(c[3] ?? 1, 1) : 1
-  const rgb = hsl2rgb(fmtVal(c[0], 360), fmtVal(c[1], 100), fmtVal(c[2], 100))
-  return { ...rgb, a }
+  return {
+    h: prsFltInt(h, 360),
+    s: prsFltInt(s, 100),
+    l: prsFltInt(l, 100),
+    a: prsAlpha(a)
+  }
+}
+
+// 分解hsl颜色值并转rgb
+export const decomposeHslaToRgba = (color: string): IColor => {
+  const { h, s, l, a } = decomposeHsla(color)
+  const { r, g, b } = hsl2rgb(h, s, l)
+  return { r, g, b, a }
 }
 
 // 分解hsv颜色值
-export const decomposeHsva = (color: string): IColor => {
-  const c = deleteSpace(color)
-    .replace(/(^hsva?)|[()%]/gi, '')
+export const decomposeHsva = (color: string): IHsv => {
+  const [h, s, v, a] = deleteSpace(color)
+    .replace(/(^hsva?)|[()]/gi, '')
+    .trim()
+    .replace(/[,\s]+/g, ',')
     .split(',')
-    .map(val => Number(val))
-  const a = hasAlpha(color) ? fmtVal(c[3] ?? 1, 1) : 1
-  const rgb = hsv2rgb(fmtVal(c[0], 360), fmtVal(c[1], 100), fmtVal(c[2], 100))
-  return { ...rgb, a }
+  return {
+    h: prsFltInt(h, 360),
+    s: prsFltInt(s, 100),
+    v: prsFltInt(v, 100),
+    a: prsAlpha(a)
+  }
+}
+
+// 分解hsv颜色值并转rgb
+export const decomposeHsvaToRgba = (color: string): IColor => {
+  const { h, s, v, a } = decomposeHsva(color)
+  const { r, g, b } = hsv2rgb(h, s, v)
+  return { r, g, b, a }
 }

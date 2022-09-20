@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:signle": "jest",
     "build": "tsc && rollup --config rollup.config.js"
   },
   "repository": {

@@ -1,17 +1,6 @@
-import * as utils from './utils'
-import { DEF_BG, CM } from './constants'
-import { rgba2rgb, alpha2rgb, rgb2hsv, rgb2hsl } from './converts'
-
-/**
- * 判断是否为颜色值
- * RGBA color to RGB
- * @param color RGBA颜色值
- * @param type 目标类型
- */
-export const isColor = (color: string, type?: string): boolean => {
-  const colorType = utils.colorType(color)
-  return !type ? !!colorType : colorType === type
-}
+import { rgb2hsv, rgb2hsl } from './converts'
+import { DEF_CRITICAL_VALUE } from './constants'
+import { fmtInt, callback, callback2, num2hex, pctHex } from './utils'
 
 /**
  * RGBA转为RGB
@@ -19,12 +8,14 @@ export const isColor = (color: string, type?: string): boolean => {
  * @param color RGBA颜色值
  * @param bgColor 背景颜色值，默认白色
  */
-export const rgbaToRgb = (color: string, bgColor: string = DEF_BG): string => {
-  if (!isColor(color, CM.rgba)) return color
-  color = utils.toLow(color)
-  // 如果 背景颜色有透明度，先先将有透明度的值转为没有透明度的值
-  const { r, g, b } = rgba2rgb(color, utils.hasAlpha(bgColor) ? rgbaToRgb(bgColor) : bgColor)
-  return `rgb(${r}, ${g}, ${b})`
+export const rgbaToRgb = (color: string, bgColor?: string): string => {
+  return callback2(
+    color,
+    ({ r, g, b }) => {
+      return `rgb(${r}, ${g}, ${b})`
+    },
+    bgColor
+  )
 }
 
 /**
@@ -33,10 +24,9 @@ export const rgbaToRgb = (color: string, bgColor: string = DEF_BG): string => {
  * @param color 颜色值
  */
 export const toRgb = (color: string): string => {
-  if (utils.isRgb(color) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b } = utils.hasAlpha(color) ? alpha2rgb(color) : utils.getColorMap(color)
-  return `rgb(${r}, ${g}, ${b})`
+  return callback(color, ({ r, g, b }) => {
+    return `rgb(${r}, ${g}, ${b})`
+  })
 }
 
 /**
@@ -46,10 +36,9 @@ export const toRgb = (color: string): string => {
  * @param alpha 透明度
  */
 export const toRgba = (color: string, alpha?: number): string => {
-  if ((utils.isRgba(color) && alpha == null) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b, a } = utils.getColorMap(alpha == null ? color : toRgb(color))
-  return `rgba(${r}, ${g}, ${b}, ${alpha ?? a ?? 1})`
+  return callback(color, ({ r, g, b }) => {
+    return `rgba(${r}, ${g}, ${b}, ${fmtInt(alpha ?? 1, 1)})`
+  })
 }
 
 /**
@@ -58,10 +47,9 @@ export const toRgba = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHex = (color: string): string => {
-  if (utils.isHex(color) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b } = utils.getColorMap(toRgb(color))
-  return `#${utils.num2hex(r)}${utils.num2hex(g)}${utils.num2hex(b)}`
+  return callback(color, ({ r, g, b }) => {
+    return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}`
+  })
 }
 
 /**
@@ -71,10 +59,9 @@ export const toHex = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHexa = (color: string, alpha?: number): string => {
-  if ((utils.isHexa(color) && alpha == null) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b, a } = utils.getColorMap(alpha == null ? color : toRgb(color))
-  return `#${utils.num2hex(r)}${utils.num2hex(g)}${utils.num2hex(b)}${utils.pctHex(alpha ?? a ?? 1)}`
+  return callback(color, ({ r, g, b }) => {
+    return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}${pctHex(alpha ?? 1)}`
+  })
 }
 
 /**
@@ -83,11 +70,10 @@ export const toHexa = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHsv = (color: string): string => {
-  if (utils.isHsv(color) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b } = utils.getColorMap(toRgb(color))
-  const { h, s, v } = rgb2hsv(r, g, b)
-  return `hsv(${h}, ${Math.round(s)}%, ${Math.round(v)}%)`
+  return callback(color, ({ r, g, b }) => {
+    const { h, s, v } = rgb2hsv(r, g, b)
+    return `hsv(${h}, ${Math.round(s)}%, ${Math.round(v)}%)`
+  })
 }
 
 /**
@@ -97,11 +83,10 @@ export const toHsv = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHsva = (color: string, alpha?: number): string => {
-  if ((utils.isHsva(color) && alpha == null) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b, a } = utils.getColorMap(alpha == null ? color : toRgb(color))
-  const { h, s, v } = rgb2hsv(r, g, b)
-  return `hsva(${h}, ${Math.round(s)}%, ${Math.round(v)}%, ${alpha ?? a ?? 1})`
+  return callback(color, ({ r, g, b }) => {
+    const { h, s, v } = rgb2hsv(r, g, b)
+    return `hsva(${h}, ${Math.round(s)}%, ${Math.round(v)}%, ${alpha ?? 1})`
+  })
 }
 
 /**
@@ -110,11 +95,10 @@ export const toHsva = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHsl = (color: string): string => {
-  if (utils.isHsl(color) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b } = utils.getColorMap(toRgb(color))
-  const { h, s, l } = rgb2hsl(r, g, b)
-  return `hsl(${h}, ${s}%, ${l}%)`
+  return callback(color, ({ r, g, b }) => {
+    const { h, s, l } = rgb2hsl(r, g, b)
+    return `hsl(${h}, ${s}%, ${l}%)`
+  })
 }
 
 /**
@@ -124,11 +108,10 @@ export const toHsl = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHsla = (color: string, alpha?: number): string => {
-  if ((utils.isHsla(color) && alpha == null) || !isColor(color)) return utils.fmtSpace(color)
-  color = utils.toLow(color)
-  const { r, g, b, a } = utils.getColorMap(alpha == null ? color : toRgb(color))
-  const { h, s, l } = rgb2hsl(r, g, b)
-  return `hsla(${h}, ${s}%, ${l}%, ${alpha ?? a ?? 1})`
+  return callback(color, ({ r, g, b }) => {
+    const { h, s, l } = rgb2hsl(r, g, b)
+    return `hsla(${h}, ${s}%, ${l}%, ${alpha ?? 1})`
+  })
 }
 
 /**
@@ -136,11 +119,14 @@ export const toHsla = (color: string, alpha?: number): string => {
  * Get color depth value，The lower the value, the higher the depth
  * @param color 颜色值
  */
-export const getColorDepth = (color: string): number | undefined => {
-  if (!isColor(color)) return undefined
-  color = utils.toLow(color)
-  const { r, g, b } = utils.getColorMap(toRgb(color))
-  return utils.fmtInt(r * 0.299 + g * 0.587 + b * 0.114)
+export const getColorDepth = (color: string): number => {
+  return callback(
+    color,
+    ({ r, g, b }) => {
+      return fmtInt(r * 0.299 + g * 0.587 + b * 0.114)
+    },
+    -1
+  )
 }
 
 /**
@@ -149,9 +135,9 @@ export const getColorDepth = (color: string): number | undefined => {
  * @param color 颜色值
  * @param criticalValue 临界值 默认127.5
  */
-export const darkColor = (color: string, criticalValue: number = 127.5): boolean | undefined => {
+export const darkColor = (color: string, criticalValue: number = DEF_CRITICAL_VALUE): boolean | undefined => {
   const depth = getColorDepth(color)
-  if (depth == null) return undefined
+  if (depth < 0) return undefined
   return depth < criticalValue
 }
 
@@ -161,7 +147,8 @@ export const darkColor = (color: string, criticalValue: number = 127.5): boolean
  * @param color 颜色值
  * @param criticalValue 临界值 默认127.5
  */
-export const lightColor = (color: string, criticalValue?: number): boolean | undefined => {
-  if (!utils.colorType(color)) return undefined
-  return !darkColor(color, criticalValue)
+export const lightColor = (color: string, criticalValue: number = DEF_CRITICAL_VALUE): boolean | undefined => {
+  const depth = getColorDepth(color)
+  if (depth < 0) return undefined
+  return depth >= criticalValue
 }

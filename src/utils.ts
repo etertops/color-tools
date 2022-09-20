@@ -1,6 +1,7 @@
 import { IColor } from './interface'
-import { CM, REG_EXP_MAP } from './constants'
-import { decomposeHexa, decomposeHsla, decomposeHsva, decomposeRgba } from './decomposes'
+import { rgba2rgbByMap } from './converts'
+import { CM, DEF_BG, REG_EXP_MAP } from './constants'
+import { decomposeRgba, decomposeHexa, decomposeHslaToRgba, decomposeHsvaToRgba } from './decomposes'
 
 export const regTest = (value: string, key: string = ''): boolean => {
   const regExp = REG_EXP_MAP[key]
@@ -30,8 +31,18 @@ export const fmtInt = (value: number, max: number = 255): number => {
   return Math.round(fmtVal(value, max))
 }
 
+// 字符串转float 后转int
+export const prsFltInt = (value: string, max?: number, def: number = 0): number => {
+  return fmtInt(value ? parseFloat(value) : def, max)
+}
+
 // 百分百转数字
 export const pctToNum = (pct: string): number => (pct.endsWith('%') ? parseFloat(pct) / 100 : parseFloat(pct))
+
+// 转换alpha通道
+export const prsAlpha = (alpha: string, def?: number): number | undefined => {
+  return alpha ? fmtVal(pctToNum(alpha), 1) : def
+}
 
 // 十六进制转数字
 export const hex2num = (hex: string | number | undefined | null): number => {
@@ -72,23 +83,23 @@ export const fmtSpace = (color: string = ''): string => {
 // 获取颜色值的类型
 export const colorType = (color: string): string => {
   if (color.length < 4) return ''
-  const lower = toLow(color)
-  if (regTest(lower, CM.rgb_a)) {
-    return lower.startsWith(CM.rgba) ? CM.rgba : CM.rgb
-  } else if (regTest(color, CM.hex_a)) {
-    return color.length === 4 || color.length === 7 ? CM.hex : CM.hexa
-  } else if (regTest(lower, CM.hsv_a)) {
-    return lower.startsWith(CM.hsva) ? CM.hsva : CM.hsv
-  } else if (regTest(lower, CM.hsl_a)) {
-    return lower.startsWith(CM.hsla) ? CM.hsla : CM.hsl
+  if (color.startsWith('#')) {
+    return CM.hex
   } else {
-    return ''
+    const type = color.toLowerCase().slice(0, 3) || ''
+    return CM[type] || ''
   }
 }
 
+// 判断是否为颜色值
+export const isColor = (color: string, type?: string): boolean => {
+  const cType = colorType(color)
+  return !type ? !!cType : cType === type
+}
+
 // 判断颜色值是否含有透明度
-export const hasAlpha = (color: string): boolean => {
-  return /a$/.test(colorType(color))
+export const validAlpha = (alpha: number | undefined): boolean => {
+  return !alpha || alpha < 1
 }
 
 // 重复一次十六进制字符
@@ -124,27 +135,36 @@ export const formatHex = (color: string): string | undefined => {
 export const getColorMap = (color: string): IColor => {
   switch (colorType(color)) {
     case CM.rgb:
-    case CM.rgba:
       return decomposeRgba(color)
     case CM.hex:
-    case CM.hexa:
       return decomposeHexa(color)
     case CM.hsl:
-    case CM.hsla:
-      return decomposeHsla(color)
+      return decomposeHslaToRgba(color)
     case CM.hsv:
-    case CM.hsva:
-      return decomposeHsva(color)
+      return decomposeHsvaToRgba(color)
     default: // 默认rgb
       return decomposeRgba(color)
   }
 }
 
-export const isRgb = (color: string): boolean => regTest(toLow(color), CM.rgb)
-export const isHex = (color: string): boolean => regTest(toLow(color), CM.hex)
-export const isHsv = (color: string): boolean => regTest(toLow(color), CM.hsv)
-export const isHsl = (color: string): boolean => regTest(toLow(color), CM.hsl)
-export const isRgba = (color: string): boolean => regTest(toLow(color), CM.rgba)
-export const isHexa = (color: string): boolean => regTest(toLow(color), CM.hexa)
-export const isHsva = (color: string): boolean => regTest(toLow(color), CM.hsva)
-export const isHsla = (color: string): boolean => regTest(toLow(color), CM.hsla)
+export const error = (color: string, error?: any): any => {
+  console.error(`【${color}】不是有效的颜色值!  The color value ${color} is invalid!`)
+  return error ?? color
+}
+
+export const callback = (color: string, fn: (map: IColor) => void, error?: any): any => {
+  if (isColor(color)) {
+    const rgba = getColorMap(color)
+    return fn(validAlpha(rgba.a) ? rgba2rgbByMap(rgba) : rgba)
+  }
+  return error(color, error)
+}
+
+export const callback2 = (color: string, fn: (map: IColor) => void, bgColor?: string, error?: any): any => {
+  if (isColor(color)) {
+    bgColor = bgColor ? (isColor(bgColor) ? bgColor : DEF_BG) : DEF_BG
+    const bgRgba = getColorMap(bgColor)
+    return fn(rgba2rgbByMap(getColorMap(color), validAlpha(bgRgba.a) ? rgba2rgbByMap(bgRgba) : bgRgba))
+  }
+  return error(color, error)
+}
