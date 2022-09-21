@@ -1,7 +1,14 @@
 import { IColor } from './interface'
 import { CM, DEF_BG } from './constants'
 import { rgba2rgbByMap } from './converts'
-import { decomposeRgba, decomposeHexa, decomposeHslaToRgba, decomposeHsvaToRgba } from './decomposes'
+import {
+  decomposeRgba,
+  decomposeHexa,
+  decomposeHsla,
+  decomposeHsva,
+  decomposeHsvaToRgba,
+  decomposeHslaToRgba
+} from './decomposes'
 
 // 百分百转数字
 const pctToNum = (pct: string): number => (pct.endsWith('%') ? parseFloat(pct) / 100 : parseFloat(pct))
@@ -19,7 +26,7 @@ const colorType = (color: string): string => {
 
 // 判断颜色值是否含有透明度
 const validAlpha = (alpha: number | undefined): boolean => {
-  return !alpha || alpha < 1
+  return !!alpha && alpha < 1 && alpha > 0
 }
 
 // 重复一次十六进制字符
@@ -88,6 +95,12 @@ export const formatHex = (color: string): string => {
   color = color.replace(/[^0-9a-fA-F]/g, '') || ''
   color = `#${color.toLowerCase()}`
   switch (color.length) {
+    case 1:
+      return `${doubleHex('#000')}`
+    case 2:
+      return `${doubleHex(color + '00')}`
+    case 3:
+      return `${doubleHex(color + '0')}`
     case 4:
       return `${doubleHex(color)}`
     case 5:
@@ -102,6 +115,48 @@ export const formatHex = (color: string): string => {
       return hexEnd(color)
     default:
       return hexEnd(color.slice(0, 9))
+  }
+}
+
+export const formatRgba = (color: string): string => {
+  color = color.replace(/[^0-9%,\s]/g, '') || ''
+  const { r, g, b, a } = decomposeRgba(color)
+  const va = validAlpha(a)
+  const alpha = va ? `, ${a}` : ''
+  return `rgb${va ? 'a' : ''}(${r}, ${g}, ${b}${alpha})`
+}
+
+export const formatHsla = (color: string): string => {
+  const { h, s, l, a } = decomposeHsla(color)
+  const va = validAlpha(a)
+  const alpha = va ? `, ${a}` : ''
+  return `hsl${va ? 'a' : ''}(${h}, ${s}%, ${l}%${alpha})`
+}
+
+export const formatHsva = (color: string): string => {
+  const { h, s, v, a } = decomposeHsva(color)
+  const va = validAlpha(a)
+  const alpha = va ? `, ${a}` : ''
+  return `hsv${va ? 'a' : ''}(${h}, ${s}%, ${v}%${alpha})`
+}
+
+export const formatColor = (color: string): string => {
+  color = color.trim().toLowerCase()
+  const match = color.match(/(^#)|(^rgba?)|(^hsla?)|(^hsva?)/gi)
+  switch (match ? match[0] : '') {
+    case '#':
+      return formatHex(color)
+    case 'rgb':
+    case 'rgba':
+      return formatRgba(color)
+    case 'hsl':
+    case 'hsla':
+      return formatHsla(color)
+    case 'hsv':
+    case 'hsva':
+      return formatHsva(color)
+    default:
+      return color
   }
 }
 
