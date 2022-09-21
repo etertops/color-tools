@@ -1,6 +1,6 @@
-import { IColor } from './interface'
 import { CM, DEF_BG } from './constants'
 import { rgba2rgbByMap } from './converts'
+import { IColor, IHsl, IHsv } from './interface'
 import {
   decomposeRgba,
   decomposeHexa,
@@ -157,6 +157,22 @@ export const formatColor = (color: string): string => {
       return formatHsva(color)
     default:
       return color
+  }
+}
+
+// 获取颜色值rgba对象
+export const getColorMap = (color: string): IColor | IHsl | IHsv => {
+  switch (colorType(color)) {
+    case CM.rgb:
+      return decomposeRgba(color)
+    case CM.hex:
+      return decomposeHexa(color)
+    case CM.hsl:
+      return decomposeHsla(color)
+    case CM.hsv:
+      return decomposeHsva(color)
+    default: // 默认rgb
+      return decomposeRgba(color)
   }
 }
 

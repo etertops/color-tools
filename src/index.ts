@@ -12,7 +12,7 @@ import {
   lightColor,
   getColorDepth
 } from './color'
-import { isColor, formatColor } from './utils'
+import { isColor, formatColor, getColorMap } from './utils'
 
 export default {
   toRgb,
@@ -27,6 +27,7 @@ export default {
   rgbaToRgb,
   darkColor,
   lightColor,
+  getColorMap,
   formatColor,
   getColorDepth,
   version: '1.0.11'
