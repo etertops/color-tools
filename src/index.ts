@@ -23,6 +23,7 @@ export default {
   toHexa,
   toHsva,
   toHsla,
+  isColor,
   rgbaToRgb,
   darkColor,
   lightColor,

@@ -161,7 +161,7 @@ export const formatColor = (color: string): string => {
 }
 
 // 获取颜色值rgba对象
-export const getColorMap = (color: string): IColor => {
+export const getRgbaMap = (color: string): IColor => {
   switch (colorType(color)) {
     case CM.rgb:
       return decomposeRgba(color)
@@ -178,7 +178,7 @@ export const getColorMap = (color: string): IColor => {
 
 export const callback = (color: string, fn: (map: IColor) => void, errorValue?: any): any => {
   if (isColor(color)) {
-    const rgba = getColorMap(color)
+    const rgba = getRgbaMap(color)
     return fn(validAlpha(rgba.a) ? rgba2rgbByMap(rgba) : rgba)
   }
   return error(color, errorValue)
@@ -187,8 +187,8 @@ export const callback = (color: string, fn: (map: IColor) => void, errorValue?: 
 export const callback2 = (color: string, fn: (map: IColor) => void, bgColor?: string, errorValue?: any): any => {
   if (isColor(color)) {
     bgColor = bgColor ? (isColor(bgColor) ? bgColor : DEF_BG) : DEF_BG
-    const bgRgba = getColorMap(bgColor)
-    return fn(rgba2rgbByMap(getColorMap(color), validAlpha(bgRgba.a) ? rgba2rgbByMap(bgRgba) : bgRgba))
+    const bgRgba = getRgbaMap(bgColor)
+    return fn(rgba2rgbByMap(getRgbaMap(color), validAlpha(bgRgba.a) ? rgba2rgbByMap(bgRgba) : bgRgba))
   }
   return error(color, errorValue)
 }
