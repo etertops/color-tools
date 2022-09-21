@@ -21,7 +21,7 @@ export const CM: { [key: string]: string } = {
   hsl_a: 'hsl_a'
 }
 
-export const REG_EXP_MAP = {
+export const REG_EXP_MAP: { [key: string]: RegExp } = {
   [CM.rgb_a]: /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*(0?\.\d+|1%?)\s*)?\)$/gi,
   [CM.hex_a]: /^#[0-9a-fA-F]{3,8}$/g,
   [CM.hsv_a]: /^hsva?\(\s*\d{1,3}(deg)?\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*(,\s*(0?\.\d+|1%?)\s*)?\)$/gi,

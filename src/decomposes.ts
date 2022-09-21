@@ -1,6 +1,6 @@
 import { hsl2rgb, hsv2rgb } from './converts'
 import { IColor, IHsl, IHsv } from './interface'
-import { deleteSpace, formatHex, hex2num, hexPct, prsAlpha, prsFltInt } from './utils'
+import { formatHex, hex2num, hexPct, prsAlpha, prsFltInt } from './utils'
 
 // 分解rgba颜色值
 export const decomposeRgba = (color: string): IColor => {
@@ -19,7 +19,7 @@ export const decomposeRgba = (color: string): IColor => {
 
 // 分解十六进制颜色值
 export const decomposeHexa = (color: string): IColor => {
-  const c = formatHex(deleteSpace(color)) ?? ''
+  const c = formatHex(color) ?? ''
   return {
     r: hex2num(c.slice(1, 3)),
     g: hex2num(c.slice(3, 5)),
@@ -52,7 +52,7 @@ export const decomposeHslaToRgba = (color: string): IColor => {
 
 // 分解hsv颜色值
 export const decomposeHsva = (color: string): IHsv => {
-  const [h, s, v, a] = deleteSpace(color)
+  const [h, s, v, a] = color
     .replace(/(^hsva?)|[()]/gi, '')
     .trim()
     .replace(/[,\s]+/g, ',')
