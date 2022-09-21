@@ -71,7 +71,7 @@ export const toHexa = (color: string, alpha?: number): string => {
  */
 export const toHsv = (color: string): string => {
   return callback(color, ({ r, g, b }) => {
-    const { h, s, v } = rgb2hsv(r, g, b)
+    const { h, s, v } = rgb2hsv({ r, g, b })
     return `hsv(${h}, ${Math.round(s)}%, ${Math.round(v)}%)`
   })
 }
@@ -84,7 +84,7 @@ export const toHsv = (color: string): string => {
  */
 export const toHsva = (color: string, alpha?: number): string => {
   return callback(color, ({ r, g, b }) => {
-    const { h, s, v } = rgb2hsv(r, g, b)
+    const { h, s, v } = rgb2hsv({ r, g, b })
     return `hsva(${h}, ${Math.round(s)}%, ${Math.round(v)}%, ${alpha ?? 1})`
   })
 }
@@ -96,7 +96,7 @@ export const toHsva = (color: string, alpha?: number): string => {
  */
 export const toHsl = (color: string): string => {
   return callback(color, ({ r, g, b }) => {
-    const { h, s, l } = rgb2hsl(r, g, b)
+    const { h, s, l } = rgb2hsl({ r, g, b })
     return `hsl(${h}, ${s}%, ${l}%)`
   })
 }
@@ -109,7 +109,7 @@ export const toHsl = (color: string): string => {
  */
 export const toHsla = (color: string, alpha?: number): string => {
   return callback(color, ({ r, g, b }) => {
-    const { h, s, l } = rgb2hsl(r, g, b)
+    const { h, s, l } = rgb2hsl({ r, g, b })
     return `hsla(${h}, ${s}%, ${l}%, ${alpha ?? 1})`
   })
 }

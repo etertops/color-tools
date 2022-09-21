@@ -46,7 +46,7 @@ export const decomposeHsla = (color: string): IHsl => {
 // 分解hsl颜色值并转rgb
 export const decomposeHslaToRgba = (color: string): IColor => {
   const { h, s, l, a } = decomposeHsla(color)
-  const { r, g, b } = hsl2rgb(h, s, l)
+  const { r, g, b } = hsl2rgb({ h, s, l })
   return { r, g, b, a }
 }
 
@@ -68,6 +68,6 @@ export const decomposeHsva = (color: string): IHsv => {
 // 分解hsv颜色值并转rgb
 export const decomposeHsvaToRgba = (color: string): IColor => {
   const { h, s, v, a } = decomposeHsva(color)
-  const { r, g, b } = hsv2rgb(h, s, v)
+  const { r, g, b } = hsv2rgb({ h, s, v })
   return { r, g, b, a }
 }
