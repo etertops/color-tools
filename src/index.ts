@@ -12,6 +12,7 @@ import {
   lightColor,
   getColorDepth
 } from './color'
+import { convert } from './converts'
 import { isColor, formatColor, getColorMap } from './utils'
 
 export default {
@@ -24,6 +25,7 @@ export default {
   toHsva,
   toHsla,
   isColor,
+  convert,
   rgbaToRgb,
   darkColor,
   lightColor,

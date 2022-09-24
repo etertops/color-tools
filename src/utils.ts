@@ -24,6 +24,11 @@ const colorType = (color: string): string => {
   }
 }
 
+// 获取颜色值的类型
+export const getColorType = (color: string): string => {
+  return colorType(color)
+}
+
 // 判断颜色值是否含有透明度
 const validAlpha = (alpha: number | undefined): boolean => {
   return !!alpha && alpha < 1 && alpha > 0
@@ -207,4 +212,12 @@ export const callback2 = (color: string, fn: (map: IColor) => void, bgColor?: st
     return fn(rgba2rgbByMap(getRgbaMap(color), validAlpha(bgRgba.a) ? rgba2rgbByMap(bgRgba) : bgRgba))
   }
   return error(color, errorValue)
+}
+
+export const contains = (object: { [key: string]: any }, keys: string[]): boolean => {
+  let flag = true
+  keys.forEach(key => {
+    flag = flag && object[key] != null
+  })
+  return flag
 }

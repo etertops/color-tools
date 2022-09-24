@@ -1,6 +1,6 @@
-import { DEF_BG, DEF_BG_MAP } from './constants'
-import { fmtInt, fmtVal, getRgbaMap } from './utils'
+import { CM, DEF_BG, DEF_BG_MAP } from './constants'
 import { IHsv, IHsl, IColor, ICmy } from './interface'
+import { fmtInt, fmtVal, getRgbaMap, contains, getColorType, getColorMap } from './utils'
 
 // 获取hue值
 const getHue = (max: number, min: number, red: number, green: number, blue: number, dif: number): number => {
@@ -19,18 +19,13 @@ const getHue = (max: number, min: number, red: number, green: number, blue: numb
 export const hsl2hsv = ({ h, s, l }: IHsl): IHsv => {
   s = s / 100
   l = l / 100
-  const lightMin = Math.max(l, 0.01)
-  let satMin = s
   l *= 2
   s *= l <= 1 ? l : 2 - l
-  satMin *= lightMin <= 1 ? lightMin : 2 - lightMin
-  const value = (l + s) / 2
-  const vSat = l === 0 ? (2 * satMin) / (lightMin + satMin) : (2 * s) / (l + s)
 
   return {
     h: fmtInt(h, 360),
-    s: vSat * 100,
-    v: value * 100
+    s: fmtInt(100 * ((2 * s) / (l + s) || 0), 100),
+    v: fmtInt(((l + s) / 2) * 100, 100)
   }
 }
 
@@ -176,8 +171,45 @@ export const alpha2rgb = (color: string): IColor => {
   return rgba2rgb(`rgba(${r}, ${g}, ${b}, ${a ?? 1})`, DEF_BG)
 }
 
+const convertTo = (color: IColor | IHsl | IHsv, method: string): IColor | IHsl | IHsv => {
+  switch (method) {
+    case 'hsv2hsv':
+    case 'hsl2hsl':
+    case 'rgb2rgb':
+      return color
+    case 'rgb2hsl':
+      return rgb2hsl(color as IColor)
+    case 'rgb2hsv':
+      return rgb2hsv(color as IColor)
+    case 'hsl2rgb':
+      return hsl2rgb(color as IHsl)
+    case 'hsl2hsv':
+      return hsl2hsv(color as IHsl)
+    case 'hsv2rgb':
+      return hsv2rgb(color as IHsv)
+    case 'hsv2hsl':
+      return hsv2hsl(color as IHsv)
+    default:
+      return color
+  }
+}
+
 // 颜色值转换
-export const convert = (color: string, source: string, target: string): IColor | IHsl | IHsv => {
-  const { r, g, b, a } = getRgbaMap(color)
-  return rgba2rgb(`rgba(${r}, ${g}, ${b}, ${a ?? 1})`, DEF_BG)
+export const convert = (color: string | IColor | IHsl | IHsv, target?: string): string | IColor | IHsl | IHsv => {
+  target = CM[target ?? CM.rgb] || CM.rgb
+  if (typeof color === 'string') {
+    const type = CM[getColorType(color) ?? '']
+    if (type) {
+      return convertTo(getColorMap(color), `${type}2${target}`)
+    }
+  } else if (typeof color === 'object') {
+    if (contains(color, ['r', 'g', 'b'])) {
+      return convertTo(color, `rgb2${target}`)
+    } else if (contains(color, ['h', 's', 'l'])) {
+      return convertTo(color, `hsl2${target}`)
+    } else if (contains(color, ['h', 's', 'v'])) {
+      return convertTo(color, `hsv2${target}`)
+    }
+  }
+  return color
 }
