@@ -9,7 +9,6 @@ export const decomposeRgba = (color: string): IColor => {
     .trim()
     .replace(/[,\s]+/g, ',')
     .split(',')
-  console.log(11111, `${r}_${g}_${b}_${a}`, color)
   return {
     r: prsFltInt(r),
     g: prsFltInt(g),

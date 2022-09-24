@@ -17,6 +17,7 @@ test('获取版本值：', () => {
   expect(formatColor('#abcdefabcd')).toBe('#abcdefab')
   expect(formatColor('#abcdefffcd')).toBe('#abcdef')
   expect(formatColor('rgb(23 , 88 , 188 )')).toBe('rgb(23, 88, 188)')
+  expect(formatColor('rgb(23, 88, 188, 0.6)')).toBe('rgba(23, 88, 188, 0.6)')
   expect(formatColor('rgb(23  88  188 )')).toBe('rgb(23, 88, 188)')
   expect(formatColor('rgb(23  88  18 8 )')).toBe('rgb(23, 88, 18)')
   expect(formatColor('rgb(23  88  18 80% )')).toBe('rgba(23, 88, 18, 0.8)')

@@ -124,7 +124,6 @@ export const formatHex = (color: string): string => {
 }
 
 export const formatRgba = (color: string): string => {
-  color = color.replace(/[^0-9%,\s]/g, '') || ''
   const { r, g, b, a } = decomposeRgba(color)
   const va = validAlpha(a)
   const alpha = va ? `, ${a}` : ''

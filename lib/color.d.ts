@@ -1,11 +1,4 @@
 /**
- * 判断是否为颜色值
- * RGBA color to RGB
- * @param color RGBA颜色值
- * @param type 目标类型
- */
-export declare const isColor: (color: string, type?: string) => boolean;
-/**
  * RGBA转为RGB
  * RGBA color to RGB
  * @param color RGBA颜色值
@@ -69,7 +62,7 @@ export declare const toHsla: (color: string, alpha?: number) => string;
  * Get color depth value，The lower the value, the higher the depth
  * @param color 颜色值
  */
-export declare const getColorDepth: (color: string) => number | undefined;
+export declare const getColorDepth: (color: string) => number;
 /**
  * 判断颜色是否是深色
  * Judge whether the color is dark or not
@@ -83,4 +76,4 @@ export declare const darkColor: (color: string, criticalValue?: number) => boole
  * @param color 颜色值
  * @param criticalValue 临界值 默认127.5
  */
-export declare const lightColor: (color: string, criticalValue: number) => boolean | undefined;
+export declare const lightColor: (color: string, criticalValue?: number) => boolean | undefined;

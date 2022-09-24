@@ -17,6 +17,7 @@ yarn.lock*
 package-lock.json*
 
 # Editor directories and files
+dist
 .history
 .idea
 .history

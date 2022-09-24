@@ -12,31 +12,42 @@
     </style>
     <script src="//unpkg.com/vue@3"></script>
     <script src="//unpkg.com/element-plus"></script>
-    <script src="../dist/index.js"></script>
+    <script src="../dist/index.umd.js"></script>
 </head>
 <body>
 <div id="app">
-    <div :style="`height: 100px; background: ${color}`" ></div>
+    <div :style="`height: 100px; background: ${value}; opacity: ${alpha}`" ></div>
     <el-row :gutter="12">
-        <el-col :span="12">
+        <el-col :span="8">
             <el-divider content-position="left">颜色值</el-divider>
             <el-input v-model="color" ></el-input>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="8">
             <el-divider content-position="left">透明度</el-divider>
             <el-input-number v-model="alpha" :step="0.1" :min="0" :max="1"></el-input-number>
         </el-col>
+        <el-col :span="8">
+            <br />
+            <br />
+            <el-divider content-position="left">格式化值：{{ value }}</el-divider>
+        </el-col>
     </el-row>
     <el-divider content-position="left">转换值</el-divider>
-    <el-descriptions title="" :column="4" :width="100">
-        <el-descriptions-item align="left" label-align="right" label="rgb">{{ rgb }}</el-descriptions-item>
-        <el-descriptions-item label="hex">{{ hex }}</el-descriptions-item>
-        <el-descriptions-item label="hsv">{{ hsv }}</el-descriptions-item>
-        <el-descriptions-item label="hsl">{{ hsl }}</el-descriptions-item>
-        <el-descriptions-item label="rgba">{{ rgba }}</el-descriptions-item>
-        <el-descriptions-item label="hexa">{{ hexa }}</el-descriptions-item>
-        <el-descriptions-item label="hsva">{{ hsva }}</el-descriptions-item>
-        <el-descriptions-item label="hsla">{{ hsla }}</el-descriptions-item>
+    <el-descriptions title="" :column="4">
+        <el-descriptions-item label="rgb：">{{ rgb }}</el-descriptions-item>
+        <el-descriptions-item label="hex：">{{ hex }}</el-descriptions-item>
+        <el-descriptions-item label="hsv：">{{ hsv }}</el-descriptions-item>
+        <el-descriptions-item label="hsl：">{{ hsl }}</el-descriptions-item>
+        <el-descriptions-item label="rgba：">{{ rgba }}</el-descriptions-item>
+        <el-descriptions-item label="hexa：">{{ hexa }}</el-descriptions-item>
+        <el-descriptions-item label="hsva：">{{ hsva }}</el-descriptions-item>
+        <el-descriptions-item label="hsla：">{{ hsla }}</el-descriptions-item>
+    </el-descriptions>
+    <el-divider content-position="left">数值</el-divider>
+    <el-descriptions title="" :column="4">
+        <el-descriptions-item label="">{{ rgbVal }}</el-descriptions-item>
+        <el-descriptions-item label="">{{ hsvVal }}</el-descriptions-item>
+        <el-descriptions-item label="">{{ hslVal }}</el-descriptions-item>
     </el-descriptions>
 </div>
 <script>
@@ -45,12 +56,12 @@
     data() {
       return {
         alpha: 1,
-        color: 'rgb(00, 85, 255)'
+        color: 'rgb(0, 85, 255)'
       };
     },
     computed: {
       value() {
-        return tools.isColor(this.color) ? this.color : ''
+        return tools.formatColor(this.color)
       },
       rgb() {
         return tools.toRgb(this.value)
@@ -75,6 +86,18 @@
       },
       hsla() {
         return tools.toHsla(this.value, this.alpha)
+      },
+      rgbVal() {
+        const { r, g, b } = tools.convert(this.value, 'rgb')
+        return `red: ${r}, green: ${g}, blue: ${b}`
+      },
+      hsvVal() {
+        const { h, s, v } = tools.convert(this.value, 'hsv')
+        return `hue: ${h}, saturation: ${s}, value:${v}`
+      },
+      hslVal() {
+        const { h, s, l } = tools.convert(this.value, 'hsl')
+        return `hue: ${h}, saturation: ${s}, lightness: ${l}`
       }
     }
   };

@@ -2,7 +2,9 @@
   "name": "@etertops/color-tools",
   "version": "1.0.11",
   "description": "color tools",
-  "main": "lib/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.umd.js",
   "directories": {
     "lib": "lib"
   },

@@ -1,18 +1,20 @@
 declare const _default: {
-    convert(color: string, target: string): any;
-    isColor: (color: string, type?: string | undefined) => boolean;
-    rgbaToRgb: (color: string, bgColor?: string) => string;
     toRgb: (color: string) => string;
-    toRgba: (color: string, alpha?: number | undefined) => string;
     toHex: (color: string) => string;
-    toHexa: (color: string, alpha?: number | undefined) => string;
     toHsv: (color: string) => string;
-    toHsva: (color: string, alpha?: number | undefined) => string;
     toHsl: (color: string) => string;
+    toRgba: (color: string, alpha?: number | undefined) => string;
+    toHexa: (color: string, alpha?: number | undefined) => string;
+    toHsva: (color: string, alpha?: number | undefined) => string;
     toHsla: (color: string, alpha?: number | undefined) => string;
-    getColorDepth: (color: string) => number | undefined;
+    isColor: (color: string, type?: string | undefined) => boolean;
+    convert: (color: string | import("./interface").IColor | import("./interface").IHsl | import("./interface").IHsv, target?: string | undefined) => string | import("./interface").IColor | import("./interface").IHsl | import("./interface").IHsv;
+    rgbaToRgb: (color: string, bgColor?: string | undefined) => string;
     darkColor: (color: string, criticalValue?: number) => boolean | undefined;
-    lightColor: (color: string, criticalValue: number) => boolean | undefined;
+    lightColor: (color: string, criticalValue?: number) => boolean | undefined;
+    getColorMap: (color: string) => import("./interface").IColor | import("./interface").IHsl | import("./interface").IHsv;
+    formatColor: (color: string) => string;
+    getColorDepth: (color: string) => number;
     version: string;
 };
 export default _default;
