@@ -1,6 +1,6 @@
 import { rgb2hsv, rgb2hsl } from './converts'
 import { DEF_CRITICAL_VALUE } from './constants'
-import { fmtInt, callback, callback2, num2hex, pctHex } from './utils'
+import { fmtInt, callback, callback2, num2hex, pctHex, fmtVal } from './utils'
 
 /**
  * RGBA转为RGB
@@ -24,9 +24,13 @@ export const rgbaToRgb = (color: string, bgColor?: string): string => {
  * @param color 颜色值
  */
 export const toRgb = (color: string): string => {
-  return callback(color, ({ r, g, b }) => {
-    return `rgb(${r}, ${g}, ${b})`
-  })
+  return callback(
+    color,
+    ({ r, g, b }) => {
+      return `rgb(${r}, ${g}, ${b})`
+    },
+    1
+  )
 }
 
 /**
@@ -36,9 +40,13 @@ export const toRgb = (color: string): string => {
  * @param alpha 透明度
  */
 export const toRgba = (color: string, alpha?: number): string => {
-  return callback(color, ({ r, g, b }) => {
-    return `rgba(${r}, ${g}, ${b}, ${fmtInt(alpha ?? 1, 1)})`
-  })
+  return callback(
+    color,
+    ({ r, g, b, a }) => {
+      return `rgba(${r}, ${g}, ${b}, ${fmtVal(alpha ?? a ?? 1, 1)})`
+    },
+    alpha
+  )
 }
 
 /**
@@ -47,9 +55,13 @@ export const toRgba = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHex = (color: string): string => {
-  return callback(color, ({ r, g, b }) => {
-    return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}`
-  })
+  return callback(
+    color,
+    ({ r, g, b }) => {
+      return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}`
+    },
+    1
+  )
 }
 
 /**
@@ -59,9 +71,13 @@ export const toHex = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHexa = (color: string, alpha?: number): string => {
-  return callback(color, ({ r, g, b }) => {
-    return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}${pctHex(alpha ?? 1)}`
-  })
+  return callback(
+    color,
+    ({ r, g, b, a }) => {
+      return `#${num2hex(r)}${num2hex(g)}${num2hex(b)}${pctHex(fmtVal(alpha ?? a ?? 1, 1))}`
+    },
+    alpha
+  )
 }
 
 /**
@@ -70,10 +86,14 @@ export const toHexa = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHsv = (color: string): string => {
-  return callback(color, ({ r, g, b }) => {
-    const { h, s, v } = rgb2hsv({ r, g, b })
-    return `hsv(${h}, ${Math.round(s)}%, ${Math.round(v)}%)`
-  })
+  return callback(
+    color,
+    ({ r, g, b }) => {
+      const { h, s, v } = rgb2hsv({ r, g, b })
+      return `hsv(${h}, ${Math.round(s)}%, ${Math.round(v)}%)`
+    },
+    1
+  )
 }
 
 /**
@@ -83,10 +103,14 @@ export const toHsv = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHsva = (color: string, alpha?: number): string => {
-  return callback(color, ({ r, g, b }) => {
-    const { h, s, v } = rgb2hsv({ r, g, b })
-    return `hsva(${h}, ${Math.round(s)}%, ${Math.round(v)}%, ${alpha ?? 1})`
-  })
+  return callback(
+    color,
+    ({ r, g, b, a }) => {
+      const { h, s, v } = rgb2hsv({ r, g, b })
+      return `hsva(${h}, ${Math.round(s)}%, ${Math.round(v)}%, ${fmtVal(alpha ?? a ?? 1, 1)})`
+    },
+    alpha
+  )
 }
 
 /**
@@ -95,10 +119,14 @@ export const toHsva = (color: string, alpha?: number): string => {
  * @param color 颜色值
  */
 export const toHsl = (color: string): string => {
-  return callback(color, ({ r, g, b }) => {
-    const { h, s, l } = rgb2hsl({ r, g, b })
-    return `hsl(${h}, ${s}%, ${l}%)`
-  })
+  return callback(
+    color,
+    ({ r, g, b }) => {
+      const { h, s, l } = rgb2hsl({ r, g, b })
+      return `hsl(${h}, ${s}%, ${l}%)`
+    },
+    1
+  )
 }
 
 /**
@@ -108,10 +136,14 @@ export const toHsl = (color: string): string => {
  * @param alpha 透明度
  */
 export const toHsla = (color: string, alpha?: number): string => {
-  return callback(color, ({ r, g, b }) => {
-    const { h, s, l } = rgb2hsl({ r, g, b })
-    return `hsla(${h}, ${s}%, ${l}%, ${alpha ?? 1})`
-  })
+  return callback(
+    color,
+    ({ r, g, b, a }) => {
+      const { h, s, l } = rgb2hsl({ r, g, b })
+      return `hsla(${h}, ${s}%, ${l}%, ${fmtVal(alpha ?? a ?? 1, 1)})`
+    },
+    alpha
+  )
 }
 
 /**
@@ -125,6 +157,7 @@ export const getColorGray = (color: string): number => {
     ({ r, g, b }) => {
       return fmtInt(r * 0.299 + g * 0.587 + b * 0.114)
     },
+    1,
     -1
   )
 }

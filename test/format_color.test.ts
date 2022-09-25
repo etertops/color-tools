@@ -1,8 +1,9 @@
-import { formatColor } from '../src/utils'
+import testListMap from './data'
+import { formatColor } from '../src'
 
 // console.log(process.argv, process.argv.length)
 
-test('获取版本值：', () => {
+test('测试颜色值转换：', () => {
   expect(formatColor('#')).toBe('#000000')
   expect(formatColor('#a')).toBe('#aa0000')
   expect(formatColor('#ab')).toBe('#aabb00')
@@ -44,4 +45,7 @@ test('获取版本值：', () => {
   expect(formatColor('hsva(23, 88, 18, 1 )')).toBe('hsv(23, 88%, 18%)')
   expect(formatColor('hsva(23, 88, 18, 90% )')).toBe('hsva(23, 88%, 18%, 0.9)')
   expect(formatColor('hsva(23, 88, 18 )')).toBe('hsv(23, 88%, 18%)')
+  testListMap.forEach(({ value, fmt }) => {
+    expect(formatColor(value)).toBe(fmt)
+  })
 })

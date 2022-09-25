@@ -1,6 +1,7 @@
 export default [
   {
     value: 'rgb(55 , 55,  55 )',
+    fmt: 'rgb(55, 55, 55)',
     alpha: undefined,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 1)',
@@ -13,18 +14,20 @@ export default [
   },
   {
     value: 'rgb(55, 55, 55, .75)',
+    fmt: 'rgba(55, 55, 55, 0.75)',
     alpha: undefined,
-    rgb: 'rgb(55, 55, 55)',
-    rgba: 'rgba(55, 55, 55, 1)',
-    hex: '#373737',
-    hexa: '#373737ff',
-    hsv: 'hsv(0, 0%, 22%)',
-    hsva: 'hsva(0, 0%, 22%, 1)',
-    hsl: 'hsl(0, 0%, 22%)',
-    hsla: 'hsla(0, 0%, 22%, 1)'
+    rgb: 'rgb(105, 105, 105)',
+    rgba: 'rgba(55, 55, 55, 0.75)',
+    hex: '#696969',
+    hexa: '#373737bf',
+    hsv: 'hsv(0, 0%, 41%)',
+    hsva: 'hsva(0, 0%, 22%, 0.75)',
+    hsl: 'hsl(0, 0%, 41%)',
+    hsla: 'hsla(0, 0%, 22%, 0.75)'
   },
   {
     value: 'rgb(55, 55, 55)',
+    fmt: 'rgb(55, 55, 55)',
     alpha: 0.8,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 0.8)',
@@ -37,18 +40,20 @@ export default [
   },
   {
     value: 'rgb(55, 55, 55, .75)',
+    fmt: 'rgba(55, 55, 55, 0.75)',
     alpha: 0.8,
-    rgb: 'rgb(55, 55, 55)',
-    rgba: 'rgba(55, 55, 55, 0.8)',
-    hex: '#373737',
-    hexa: '#373737cc',
-    hsv: 'hsv(0, 0%, 22%)',
-    hsva: 'hsva(0, 0%, 22%, 0.8)',
-    hsl: 'hsl(0, 0%, 22%)',
-    hsla: 'hsla(0, 0%, 22%, 0.8)'
+    rgb: 'rgb(105, 105, 105)',
+    rgba: 'rgba(105, 105, 105, 0.8)',
+    hex: '#696969',
+    hexa: '#696969cc',
+    hsv: 'hsv(0, 0%, 41%)',
+    hsva: 'hsva(0, 0%, 41%, 0.8)',
+    hsl: 'hsl(0, 0%, 41%)',
+    hsla: 'hsla(0, 0%, 41%, 0.8)'
   },
   {
     value: 'rgba(55, 55, 55)',
+    fmt: 'rgb(55, 55, 55)',
     alpha: undefined,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 1)',
@@ -61,6 +66,7 @@ export default [
   },
   {
     value: 'rgba(55 ,  55, 55, .75)',
+    fmt: 'rgba(55, 55, 55, 0.75)',
     alpha: undefined,
     rgb: 'rgb(105, 105, 105)',
     rgba: 'rgba(55, 55, 55, 0.75)',
@@ -73,6 +79,7 @@ export default [
   },
   {
     value: 'rgba(55, 55, 55)',
+    fmt: 'rgb(55, 55, 55)',
     alpha: 0.8,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 0.8)',
@@ -85,6 +92,7 @@ export default [
   },
   {
     value: 'rgba(55, 55, 55, .75)',
+    fmt: 'rgba(55, 55, 55, 0.75)',
     alpha: 0.8,
     rgb: 'rgb(105, 105, 105)',
     rgba: 'rgba(105, 105, 105, 0.8)',
@@ -97,6 +105,7 @@ export default [
   },
   {
     value: '#373737',
+    fmt: '#373737',
     alpha: undefined,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 1)',
@@ -109,6 +118,7 @@ export default [
   },
   {
     value: '#373737bf',
+    fmt: '#373737bf',
     alpha: undefined,
     rgb: 'rgb(105, 105, 105)',
     rgba: 'rgba(55, 55, 55, 0.75)',
@@ -121,6 +131,7 @@ export default [
   },
   {
     value: '#373737',
+    fmt: '#373737',
     alpha: 0.8,
     rgb: 'rgb(55, 55, 55)',
     rgba: 'rgba(55, 55, 55, 0.8)',
@@ -133,6 +144,7 @@ export default [
   },
   {
     value: '#373737bf',
+    fmt: '#373737bf',
     alpha: 0.8,
     rgb: 'rgb(105, 105, 105)',
     rgba: 'rgba(105, 105, 105, 0.8)',
@@ -145,6 +157,7 @@ export default [
   },
   {
     value: '#05fbf',
+    fmt: '#0055ffbf',
     alpha: undefined,
     rgb: 'rgb(64, 128, 255)',
     rgba: 'rgba(0, 85, 255, 0.75)',
@@ -157,6 +170,7 @@ export default [
   },
   {
     value: '#0055ffc',
+    fmt: '#0055ffcc',
     alpha: undefined,
     rgb: 'rgb(51, 119, 255)',
     rgba: 'rgba(0, 85, 255, 0.8)',
@@ -169,6 +183,7 @@ export default [
   },
   {
     value: '#0055ff99',
+    fmt: '#0055ff99',
     alpha: undefined,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(0, 85, 255, 0.6)',
@@ -181,6 +196,7 @@ export default [
   },
   {
     value: '#0055ff99',
+    fmt: '#0055ff99',
     alpha: 0.4,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(102, 153, 255, 0.4)',
@@ -193,6 +209,7 @@ export default [
   },
   {
     value: 'hsv(220, 100%, 100%)',
+    fmt: 'hsv(220, 100%, 100%)',
     alpha: undefined,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 1)',
@@ -205,18 +222,20 @@ export default [
   },
   {
     value: 'hsv(220, 100%, 100%, .75)',
+    fmt: 'hsva(220, 100%, 100%, 0.75)',
     alpha: undefined,
-    rgb: 'rgb(0, 85, 255)',
-    rgba: 'rgba(0, 85, 255, 1)',
-    hex: '#0055ff',
-    hexa: '#0055ffff',
-    hsv: 'hsv(220, 100%, 100%)',
-    hsva: 'hsva(220, 100%, 100%, 1)',
-    hsl: 'hsl(220, 100%, 50%)',
-    hsla: 'hsla(220, 100%, 50%, 1)'
+    rgb: 'rgb(64, 128, 255)',
+    rgba: 'rgba(0, 85, 255, 0.75)',
+    hex: '#4080ff',
+    hexa: '#0055ffbf',
+    hsv: 'hsv(220, 75%, 100%)',
+    hsva: 'hsva(220, 100%, 100%, 0.75)',
+    hsl: 'hsl(220, 100%, 63%)',
+    hsla: 'hsla(220, 100%, 50%, 0.75)'
   },
   {
     value: 'hsv(220, 100%, 100%)',
+    fmt: 'hsv(220, 100%, 100%)',
     alpha: 0.8,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 0.8)',
@@ -229,18 +248,20 @@ export default [
   },
   {
     value: 'hsv(220, 100%, 100%, .75)',
+    fmt: 'hsva(220, 100%, 100%, 0.75)',
     alpha: 0.8,
-    rgb: 'rgb(0, 85, 255)',
-    rgba: 'rgba(0, 85, 255, 0.8)',
-    hex: '#0055ff',
-    hexa: '#0055ffcc',
-    hsv: 'hsv(220, 100%, 100%)',
-    hsva: 'hsva(220, 100%, 100%, 0.8)',
-    hsl: 'hsl(220, 100%, 50%)',
-    hsla: 'hsla(220, 100%, 50%, 0.8)'
+    rgb: 'rgb(64, 128, 255)',
+    rgba: 'rgba(64, 128, 255, 0.8)',
+    hex: '#4080ff',
+    hexa: '#4080ffcc',
+    hsv: 'hsv(220, 75%, 100%)',
+    hsva: 'hsva(220, 75%, 100%, 0.8)',
+    hsl: 'hsl(220, 100%, 63%)',
+    hsla: 'hsla(220, 100%, 63%, 0.8)'
   },
   {
     value: 'hsva(220, 100%, 100%)',
+    fmt: 'hsv(220, 100%, 100%)',
     alpha: undefined,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 1)',
@@ -253,6 +274,7 @@ export default [
   },
   {
     value: 'hsva(220, 100%, 100%, .6)',
+    fmt: 'hsva(220, 100%, 100%, 0.6)',
     alpha: undefined,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(0, 85, 255, 0.6)',
@@ -265,6 +287,7 @@ export default [
   },
   {
     value: 'hsva(220, 100%, 100%)',
+    fmt: 'hsv(220, 100%, 100%)',
     alpha: 0.8,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 0.8)',
@@ -277,6 +300,7 @@ export default [
   },
   {
     value: 'hsva(220, 100%, 100%, 0.6)',
+    fmt: 'hsva(220, 100%, 100%, 0.6)',
     alpha: 0.8,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(102, 153, 255, 0.8)',
@@ -289,6 +313,7 @@ export default [
   },
   {
     value: 'hsl(220, 100%, 50%)',
+    fmt: 'hsl(220, 100%, 50%)',
     alpha: undefined,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 1)',
@@ -301,18 +326,20 @@ export default [
   },
   {
     value: 'hsl(220, 100%, 50%, .6)',
+    fmt: 'hsla(220, 100%, 50%, 0.6)',
     alpha: undefined,
-    rgb: 'rgb(0, 85, 255)',
-    rgba: 'rgba(0, 85, 255, 1)',
-    hex: '#0055ff',
-    hexa: '#0055ffff',
-    hsv: 'hsv(220, 100%, 100%)',
-    hsva: 'hsva(220, 100%, 100%, 1)',
-    hsl: 'hsl(220, 100%, 50%)',
-    hsla: 'hsla(220, 100%, 50%, 1)'
+    rgb: 'rgb(102, 153, 255)',
+    rgba: 'rgba(0, 85, 255, 0.6)',
+    hex: '#6699ff',
+    hexa: '#0055ff99',
+    hsv: 'hsv(220, 60%, 100%)',
+    hsva: 'hsva(220, 100%, 100%, 0.6)',
+    hsl: 'hsl(220, 100%, 70%)',
+    hsla: 'hsla(220, 100%, 50%, 0.6)'
   },
   {
     value: 'hsl(220, 100%, 50%)',
+    fmt: 'hsl(220, 100%, 50%)',
     alpha: 0.8,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 0.8)',
@@ -325,18 +352,20 @@ export default [
   },
   {
     value: 'hsl(220, 100%, 50%, 0.6)',
+    fmt: 'hsla(220, 100%, 50%, 0.6)',
     alpha: 0.8,
-    rgb: 'rgb(0, 85, 255)',
-    rgba: 'rgba(0, 85, 255, 0.8)',
-    hex: '#0055ff',
-    hexa: '#0055ffcc',
-    hsv: 'hsv(220, 100%, 100%)',
-    hsva: 'hsva(220, 100%, 100%, 0.8)',
-    hsl: 'hsl(220, 100%, 50%)',
-    hsla: 'hsla(220, 100%, 50%, 0.8)'
+    rgb: 'rgb(102, 153, 255)',
+    rgba: 'rgba(102, 153, 255, 0.8)',
+    hex: '#6699ff',
+    hexa: '#6699ffcc',
+    hsv: 'hsv(220, 60%, 100%)',
+    hsva: 'hsva(220, 60%, 100%, 0.8)',
+    hsl: 'hsl(220, 100%, 70%)',
+    hsla: 'hsla(220, 100%, 70%, 0.8)'
   },
   {
     value: 'hsla(220, 100%, 50%)',
+    fmt: 'hsl(220, 100%, 50%)',
     alpha: undefined,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 1)',
@@ -349,6 +378,7 @@ export default [
   },
   {
     value: 'hsla(220, 100%, 50%, .6)',
+    fmt: 'hsla(220, 100%, 50%, 0.6)',
     alpha: undefined,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(0, 85, 255, 0.6)',
@@ -361,6 +391,7 @@ export default [
   },
   {
     value: 'hsla(220, 100%, 50%)',
+    fmt: 'hsl(220, 100%, 50%)',
     alpha: 0.8,
     rgb: 'rgb(0, 85, 255)',
     rgba: 'rgba(0, 85, 255, 0.8)',
@@ -373,6 +404,7 @@ export default [
   },
   {
     value: 'hsla(220, 100%, 50%, 0.6)',
+    fmt: 'hsla(220, 100%, 50%, 0.6)',
     alpha: 0.8,
     rgb: 'rgb(102, 153, 255)',
     rgba: 'rgba(102, 153, 255, 0.8)',

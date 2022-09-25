@@ -82,7 +82,7 @@ export const num2hex = (num: number): string => {
 
 // 十六进制值转为百分比
 export const hexPct = (hex: string | undefined | null): number => {
-  return hex == null ? 1 : fmtInt((hex2num(hex) * 100) / 255) / 100
+  return !hex ? 1 : fmtInt((hex2num(hex) * 100) / 255) / 100
 }
 
 // 百分比转化为两位十六进制
@@ -196,10 +196,10 @@ export const getRgbaMap = (color: string): IColor => {
   }
 }
 
-export const callback = (color: string, fn: (map: IColor) => void, errorValue?: any): any => {
+export const callback = (color: string, fn: (map: IColor) => void, alpha?: number, errorValue?: any): any => {
   if (isColor(color)) {
     const rgba = getRgbaMap(color)
-    return fn(validAlpha(rgba.a) ? rgba2rgbByMap(rgba) : rgba)
+    return fn(alpha != null && validAlpha(rgba.a) ? rgba2rgbByMap(rgba) : rgba)
   }
   return error(color, errorValue)
 }

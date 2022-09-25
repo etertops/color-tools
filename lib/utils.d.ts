@@ -16,7 +16,7 @@ export declare const formatHsva: (color: string) => string;
 export declare const formatColor: (color: string) => string;
 export declare const getColorMap: (color: string) => IColor | IHsl | IHsv;
 export declare const getRgbaMap: (color: string) => IColor;
-export declare const callback: (color: string, fn: (map: IColor) => void, errorValue?: any) => any;
+export declare const callback: (color: string, fn: (map: IColor) => void, alpha?: number, errorValue?: any) => any;
 export declare const callback2: (color: string, fn: (map: IColor) => void, bgColor?: string, errorValue?: any) => any;
 export declare const contains: (object: {
     [key: string]: any;

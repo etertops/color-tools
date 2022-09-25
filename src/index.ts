@@ -12,5 +12,5 @@ export default {
   convert,
   getColorMap,
   formatColor,
-  version: '1.0.12-alpha.3'
+  version: '1.0.13'
 }
