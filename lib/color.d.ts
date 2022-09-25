@@ -58,11 +58,11 @@ export declare const toHsl: (color: string) => string;
  */
 export declare const toHsla: (color: string, alpha?: number) => string;
 /**
- * 获取颜色深度值，值越低深度越高
+ * 获取颜色灰度值，值越低深度越高
  * Get color depth value，The lower the value, the higher the depth
  * @param color 颜色值
  */
-export declare const getColorDepth: (color: string) => number;
+export declare const getColorGray: (color: string) => number;
 /**
  * 判断颜色是否是深色
  * Judge whether the color is dark or not

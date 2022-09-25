@@ -1,36 +1,16 @@
-import {
-  toRgb,
-  toHex,
-  toHsv,
-  toHsl,
-  toRgba,
-  toHexa,
-  toHsva,
-  toHsla,
-  rgbaToRgb,
-  darkColor,
-  lightColor,
-  getColorDepth
-} from './color'
+import * as tools from './color'
 import { convert } from './converts'
 import { isColor, formatColor, getColorMap } from './utils'
 
+export * from './color'
+export { convert } from './converts'
+export { isColor, formatColor, getColorMap } from './utils'
+
 export default {
-  toRgb,
-  toHex,
-  toHsv,
-  toHsl,
-  toRgba,
-  toHexa,
-  toHsva,
-  toHsla,
+  ...tools,
   isColor,
   convert,
-  rgbaToRgb,
-  darkColor,
-  lightColor,
   getColorMap,
   formatColor,
-  getColorDepth,
-  version: '1.0.12-alpha.1'
+  version: '1.0.12-alpha.3'
 }

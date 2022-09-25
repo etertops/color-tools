@@ -115,11 +115,11 @@ export const toHsla = (color: string, alpha?: number): string => {
 }
 
 /**
- * 获取颜色深度值，值越低深度越高
+ * 获取颜色灰度值，值越低深度越高
  * Get color depth value，The lower the value, the higher the depth
  * @param color 颜色值
  */
-export const getColorDepth = (color: string): number => {
+export const getColorGray = (color: string): number => {
   return callback(
     color,
     ({ r, g, b }) => {
@@ -136,7 +136,7 @@ export const getColorDepth = (color: string): number => {
  * @param criticalValue 临界值 默认127.5
  */
 export const darkColor = (color: string, criticalValue: number = DEF_CRITICAL_VALUE): boolean | undefined => {
-  const depth = getColorDepth(color)
+  const depth = getColorGray(color)
   if (depth < 0) return undefined
   return depth < criticalValue
 }
@@ -148,7 +148,7 @@ export const darkColor = (color: string, criticalValue: number = DEF_CRITICAL_VA
  * @param criticalValue 临界值 默认127.5
  */
 export const lightColor = (color: string, criticalValue: number = DEF_CRITICAL_VALUE): boolean | undefined => {
-  const depth = getColorDepth(color)
+  const depth = getColorGray(color)
   if (depth < 0) return undefined
   return depth >= criticalValue
 }
