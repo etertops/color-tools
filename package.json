@@ -21,6 +21,9 @@
   "homepage": "https://etertops.github.io/color-tools/",
   "author": "Etertops",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "registry":"https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
