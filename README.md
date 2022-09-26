@@ -24,7 +24,7 @@ import { convert, toRgb, toHex, rgbaToRgb, getColorGray, darkColor } from "@eter
 
 convert('#05f', 'rgb') // { r: 0, g: 85, b: 255 }
 convert('#05f', 'hsl') // { h: 220, s: 100, l: 50 }
-convert('#05f', 'hsv') // { h: 220, s: 100, l: 100 }
+convert('#05f', 'hsv') // { h: 220, s: 100, v: 100 }
 
 toRgb('#05f') // "rgb(0, 85, 255)"
 toHex('rgb(0, 85, 255)') // "#0055ff"
