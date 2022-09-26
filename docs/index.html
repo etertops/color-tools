@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>color tools example</title>
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <script src="//unpkg.com/vue@3"></script>
+    <script src="//unpkg.com/element-plus"></script>
+    <script src="../dist/index.umd.js"></script>
+</head>
+<body>
+<div id="app">
+    <div style="text-align: left;">
+        <div :style="`height: 100px; background: ${value}; opacity: ${opacity || 1};`" ></div>
+        <el-row :gutter="12">
+            <el-col :span="8">
+                <el-divider content-position="left">颜色值 color input</el-divider>
+                <el-input v-model="color" ></el-input>
+            </el-col>
+            <el-col :span="8">
+                <el-divider content-position="left">透明度 alpha</el-divider>
+                <el-input-number v-model="opacity" :step="0.1" :min="0" :max="1"></el-input-number>
+            </el-col>
+            <el-col :span="8">
+                <el-divider content-position="left">格式化值 format color：{{ fmt }}</el-divider>
+                <div>转化值 color：{{ value }}</div>
+            </el-col>
+        </el-row>
+        <el-divider content-position="left">转换值 color type</el-divider>
+        <el-row :gutter="12">
+            <el-col :span="6">{{ rgb }}</el-col>
+            <el-col :span="6">{{ hex }}</el-col>
+            <el-col :span="6">{{ hsv }}</el-col>
+            <el-col :span="6">{{ hsl }}</el-col>
+        </el-row>
+        <el-divider content-position="left">转换值 带透明度 color type and alpha</el-divider>
+        <el-row :gutter="12">
+            <el-col :span="6">{{ rgba }}</el-col>
+            <el-col :span="6">{{ hexa }}</el-col>
+            <el-col :span="6">{{ hsva }}</el-col>
+            <el-col :span="6">{{ hsla }}</el-col>
+        </el-row>
+        <el-divider content-position="left">数值 color value</el-divider>
+        <el-row :gutter="12">
+            <el-col :span="8">{{ rgbVal }}</el-col>
+            <el-col :span="8">{{ hsvVal }}</el-col>
+            <el-col :span="8">{{ hslVal }}</el-col>
+        </el-row>
+        <el-row :gutter="12">
+            <el-col :span="8">
+                <el-divider content-position="left">灰度值 gray</el-divider>
+                <div>{{ depth }}</div>
+            </el-col>
+            <el-col :span="8">
+                <el-divider content-position="left">暗色 dark color</el-divider>
+                <div>{{ isDark }}</div>
+            </el-col>
+            <el-col :span="8">
+                <el-divider content-position="left">浅色 light color</el-divider>
+                <div>{{ !isDark }}</div>
+            </el-col>
+        </el-row>
+    </div>
+</div>
+<script>
+  const tools = window.ColorTools || {}
+  const App = {
+    data() {
+      return {
+        opacity: 1,
+        color: 'rgb(0, 85, 255)'
+      };
+    },
+    computed: {
+      alpha() {
+        const { opacity } = this
+        return !opacity && opacity !== 0 ? undefined : opacity
+      },
+      fmt() {
+        return tools.formatColor(this.color)
+      },
+      value() {
+        return tools.isColor(this.fmt) ? this.fmt : ''
+      },
+      rgb() {
+        return tools.toRgb(this.value)
+      },
+      hex() {
+        return tools.toHex(this.value)
+      },
+      hsv() {
+        return tools.toHsv(this.value)
+      },
+      hsl() {
+        return tools.toHsl(this.value)
+      },
+      rgba() {
+        return tools.toRgba(this.value, this.alpha)
+      },
+      hexa() {
+        return tools.toHexa(this.value, this.alpha)
+      },
+      hsva() {
+        return tools.toHsva(this.value, this.alpha)
+      },
+      hsla() {
+        return tools.toHsla(this.value, this.alpha)
+      },
+      depth() {
+        return tools.getColorGray(this.value)
+      },
+      isDark() {
+        return tools.darkColor(this.value)
+      },
+      rgbVal() {
+        const { r, g, b } = tools.convert(this.value, 'rgb')
+        return `red: ${r}, green: ${g}, blue: ${b}`
+      },
+      hsvVal() {
+        const { h, s, v } = tools.convert(this.value, 'hsv')
+        return `hue: ${h}, saturation: ${s}, value:${v}`
+      },
+      hslVal() {
+        const { h, s, l } = tools.convert(this.value, 'hsl')
+        return `hue: ${h}, saturation: ${s}, lightness: ${l}`
+      }
+    }
+  };
+  const app = Vue.createApp(App);
+  app.use(ElementPlus);
+  app.mount('#app');
+</script>
+</body>
+</html>

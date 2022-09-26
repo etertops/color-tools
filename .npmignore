@@ -35,5 +35,5 @@ tsconfig.json
 tsconfig.eslint.json
 babel.config.js
 rollup.config.js
-example
+docs
 test
