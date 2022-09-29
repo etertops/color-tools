@@ -1,39 +1,46 @@
 export interface IColor {
+  [key: string]: number | undefined
+  a?: number
+}
+
+export interface IRgb extends IColor {
   r: number
   g: number
   b: number
-  a?: number
 }
 
-export interface IHsl {
+export interface IHsl extends IColor {
   h: number
   s: number
   l: number
-  a?: number
 }
 
-export interface IHsv {
+export interface IHsv extends IColor {
   h: number
   s: number
   v: number
-  a?: number
 }
 
-export interface ICmy {
+export interface ICmy extends IColor {
   c: number
   m: number
   y: number
-  a?: number
 }
 
-export interface ICmyk {
+export interface IHwb extends IColor {
+  h: number
+  w: number
+  b: number
+}
+
+export interface ICmyk extends IColor {
   c: number
   m: number
   y: number
-  a?: number
+  k: number
 }
 
-export interface IColorMap {
+export interface IRgbMap {
   rgb?: string
   hex?: string
   hsv?: string

@@ -1,7 +1,7 @@
-import { IColor } from './interface'
+import { IRgb } from './interface'
 
 export const DEF_BG = '#ffffffff'
-export const DEF_BG_MAP: IColor = { r: 255, g: 255, b: 255 }
+export const DEF_BG_MAP: IRgb = { r: 255, g: 255, b: 255 }
 
 export const DEF_CRITICAL_VALUE = 127.5
 

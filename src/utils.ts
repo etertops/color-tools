@@ -1,6 +1,6 @@
 import { CM, DEF_BG } from './constants'
 import { rgba2rgbByMap } from './converts'
-import { IColor, IHsl, IHsv } from './interface'
+import { IRgb, IHsl, IHsv } from './interface'
 import {
   decomposeRgba,
   decomposeHexa,
@@ -165,7 +165,7 @@ export const formatColor = (color: string): string => {
 }
 
 // 获取颜色值rgba对象
-export const getColorMap = (color: string): IColor | IHsl | IHsv => {
+export const getColorMap = (color: string): IRgb | IHsl | IHsv => {
   switch (colorType(color)) {
     case CM.rgb:
       return decomposeRgba(color)
@@ -181,7 +181,7 @@ export const getColorMap = (color: string): IColor | IHsl | IHsv => {
 }
 
 // 获取颜色值rgba对象
-export const getRgbaMap = (color: string): IColor => {
+export const getRgbaMap = (color: string): IRgb => {
   switch (colorType(color)) {
     case CM.rgb:
       return decomposeRgba(color)
@@ -196,7 +196,7 @@ export const getRgbaMap = (color: string): IColor => {
   }
 }
 
-export const callback = (color: string, fn: (map: IColor) => void, alpha?: number, errorValue?: any): any => {
+export const callback = (color: string, fn: (map: IRgb) => void, alpha?: number, errorValue?: any): any => {
   if (isColor(color)) {
     const rgba = getRgbaMap(color)
     return fn(alpha != null && validAlpha(rgba.a) ? rgba2rgbByMap(rgba) : rgba)
@@ -204,7 +204,7 @@ export const callback = (color: string, fn: (map: IColor) => void, alpha?: numbe
   return error(color, errorValue)
 }
 
-export const callback2 = (color: string, fn: (map: IColor) => void, bgColor?: string, errorValue?: any): any => {
+export const callback2 = (color: string, fn: (map: IRgb) => void, bgColor?: string, errorValue?: any): any => {
   if (isColor(color)) {
     bgColor = bgColor ? (isColor(bgColor) ? bgColor : DEF_BG) : DEF_BG
     const bgRgba = getRgbaMap(bgColor)
